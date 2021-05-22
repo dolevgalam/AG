@@ -15,7 +15,7 @@ const Home = () => {
   };
 
   const deleteUser = async id => {
-    await axios.delete(`http://localhost:3003/users/${id}`);//Moshe
+    await axios.delete(`http://localhost:3003/users/${id}`);//Moshe Rozner
     loadUsers();
   };
 
