@@ -15,11 +15,12 @@ const Home = () => {
   };
 
   const deleteUser = async id => {
-    await axios.delete(`http://localhost:3003/users/${id}`);
+    await axios.delete(`http://localhost:3003/users/${id}`);//Moshe
     loadUsers();
   };
 
   return (
+   
     <div className="container">
       <div className="py-4">
         <h1>Home Page</h1>
