@@ -33,7 +33,7 @@ router.get('/',async(req,res) => {
             const salesItems = await salesItem.find();
             res.json(salesItems);
         } catch (err){
-            res.json({ message:err});
+            res.json({ message:err.message});
         }
 });
 
@@ -49,6 +49,7 @@ router.get('/:specific',async(req,res) => {;
 
 // delete specific salesItem
 router.delete('/:specific',async(req,res) => {;
+    console.log('delete');
     try { 
         const specificSalesItem = await salesItem.deleteOne({name : req.params.specific});
         res.json(specificSalesItem);
