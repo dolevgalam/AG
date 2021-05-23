@@ -49,7 +49,7 @@ const SalesItem = () => {
                     </Link>
                     {/* <Link
                       class="btn btn-outline-primary mr-2"
-                      to={`/users/edit/${user.id}`}
+                      to={`/salesItem/edit/${salesItem.name}`}
                     >
                       Edit
                     </Link> */}

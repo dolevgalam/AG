@@ -66,10 +66,11 @@ router.patch('/:specific',upload.single('image'),async(req,res) => {
         {name : req.params.specific},
         {$set: {name: req.body.name,
                 description: req.body.description,
-                picturepath: "/images/" + req.file.filename}});
+                //picturepath: "/images/" + req.file.filename
+            }});
         res.json(updateSalesItem);
     }catch(err) {
-        res.json({ message: err});
+        res.json({ message: err.message});
     }
 });
 // post specific salesItem
