@@ -6,10 +6,10 @@ const SalesItem = () => {
     const [users, setUser] = useState([]);
 
     useEffect(() => {
-      loadUsers();
+      loadSaleItem();
     }, []);
   
-    const loadUsers = async () => {
+    const loadSaleItem = async () => {
       const result = await axios.get("http://localhost:3000/salesItem");
       console.log(result.data);
       setUser(result.data.reverse());
@@ -17,9 +17,9 @@ const SalesItem = () => {
   
     const deleteUser = async id => {
       await axios.delete(`http://localhost:3003/users/${id}`);
-      loadUsers();
+      loadSaleItem();
     };
-  //{"id":{"$oid":"60a031a47c58de22f46679f5"},"name":"blue","description":"blue-item-","picturepath":"/images/close.PNG","date":{"$date":{"$numberLong":"1621111204401"}},"_v":{"$numberInt":"0"}}
+  
     return (
       <div className="container">
         <div className="py-4">
