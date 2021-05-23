@@ -44,10 +44,10 @@ const SalesItem = () => {
                   <td>{salesItem.description}</td>
                   <td>{salesItem.date}</td>
                   { <td>
-                    {/* <Link class="btn btn-primary mr-2" to={`/users/${user.id}`}>
+                    <Link class="btn btn-primary mr-2" to={`/salesItem/${salesItem.name}`}>
                       View
                     </Link>
-                    <Link
+                    {/* <Link
                       class="btn btn-outline-primary mr-2"
                       to={`/users/edit/${user.id}`}
                     >
