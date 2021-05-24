@@ -74,14 +74,16 @@ router.patch('/:specific',upload.single('image'),async(req,res) => {
     }
 });
 // post specific salesItem
-router.post('/',upload.single('image'), async (req, res) => {
-    const salesItem = new SalesItem({
+//router.post('/',upload.single('image'), async (req, res) => {
+    router.post('/', async (req, res) => {    
+        console.log(req.body);
+    const newsalesItem = new salesItem({
         name: req.body.name,
         description: req.body.description,
         picturepath: "/images/" + req.file.filename
     });
     try {
-        const savedSalesItem = await salesItem.save();
+        const savedSalesItem = await newsalesItem.save();
         res.send("Done");
     } catch (err) {
         res.json({ message:err});

@@ -6,24 +6,26 @@ const SalesItem = () => {
     const [salesitems, setSalesitems] = useState([]);
 
     useEffect(() => {
-      loadUsers();
+      loadAllSalesItem();
     }, []);
   
-    const loadUsers = async () => {
+    const loadAllSalesItem = async () => {
       const result = await axios.get("http://localhost:3001/salesItem");
       setSalesitems(result.data.reverse());
     };
   
-    const deleteUser = async name => {
+    const deleteSalesItem = async name => {
       await axios.delete(`http://localhost:3001/salesItem/${name}`);
       console.log("delete" + " " + name);
-      loadUsers();
+      loadAllSalesItem();
     };
-  //{"id":{"$oid":"60a031a47c58de22f46679f5"},"name":"blue","description":"blue-item-","picturepath":"/images/close.PNG","date":{"$date":{"$numberLong":"1621111204401"}},"_v":{"$numberInt":"0"}}
     return (
       <div className="container">
         <div className="py-4">
-          <h1>Sales item</h1>
+         <div class="form-group row"> 
+          <h2>Sales item</h2> 
+          <Link className="btn btn-primary" to={`/salesItem/add`}>Add New</Link>
+          </div>
           <table class="table border shadow">
             <thead class="thead-dark">
               <tr>
@@ -44,18 +46,18 @@ const SalesItem = () => {
                   <td>{salesItem.description}</td>
                   <td>{salesItem.date}</td>
                   { <td>
-                    <Link class="btn btn-primary mr-2" to={`/salesItem/${salesItem.name}`}>
+                    <Link class="btn btn-info mr-2" to={`/salesItem/view/${salesItem.name}`}>
                       View
                     </Link>
-                    {/* <Link
-                      class="btn btn-outline-primary mr-2"
+                    <Link
+                      class="btn btn-outline-secondary mr-2"
                       to={`/salesItem/edit/${salesItem.name}`}
                     >
                       Edit
-                    </Link> */}
+                    </Link>
                     <Link
                       class="btn btn-danger"
-                      onClick={() => deleteUser(salesItem.name)}
+                      onClick={() => deleteSalesItem(salesItem.name)}
                     >
                       Delete
                     </Link>

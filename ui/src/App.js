@@ -14,6 +14,9 @@ import EditUser from "./components/users/EditUser";
 import User from "./components/users/User";
 import SalesItem from "./components/pages/SalesItem";
 import SalesItem_View from "./components/SalesItem/SalesItem";
+import EditSalesItem from "./components/SalesItem/EditSalesItem";
+import AddSalesItem from "./components/SalesItem/AddSalesItem";
+
 
 function App(props) {
   return (
@@ -30,7 +33,11 @@ function App(props) {
           <Route exact path="/users/edit/:id" component={EditUser} />
           <Route exact path="/users/:id" component={User} />
           <Route exact path="/salesitem" component={SalesItem} />
-          <Route exact path="/salesitem/:id" component={SalesItem_View} />
+          <Route exact path="/salesitem/view/:id" component={SalesItem_View} />
+          <Route exact path="/salesitem/edit/:id" component={EditSalesItem} />
+          <Route exact path="/salesitem/add" component={AddSalesItem} />
+
+
           <Route component={NotFound} />
         </Switch>
       </div>

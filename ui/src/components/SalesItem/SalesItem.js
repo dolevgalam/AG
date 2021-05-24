@@ -12,13 +12,16 @@ const SalesItem = () => {
   });
   const { id } = useParams();
   useEffect(() => {
-    loadUser();
+    loadSalesItem();
   }, []);
-  const loadUser = async () => {
+  const loadSalesItem = async () => {
     const res = await axios.get(`http://localhost:3001/salesItem/${id}`);
-    console.log(res);
-    res.data.picturepath = 'http://localhost:3001' + res.data.picturepath
-    setSalesItem(res.data);
+    console.log(res.data);
+    if(res.data!=null){
+      console.log(res);
+      res.data.picturepath = 'http://localhost:3001' + res.data.picturepath
+      setSalesItem(res.data);
+    }
   };
   return (
     <div className="container py-4">
