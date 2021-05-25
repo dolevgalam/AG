@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container">
         <Link className="navbar-brand" href="/">
-          Recat User
+          AG
         </Link>
         <button
           className="navbar-toggler"
@@ -16,7 +16,7 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"> </span>
         </button>
 
         <div className="collapse navbar-collapse">
@@ -26,21 +26,21 @@ const Navbar = () => {
               Dashboard
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" exact to="/home">
                 Home
               </NavLink>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <NavLink className="nav-link" exact to="/about">
                 About
               </NavLink>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <NavLink className="nav-link" exact to="/contact">
                 Contact
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/salesitem">
               SalesItem
@@ -48,6 +48,8 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        <Link className="btn btn-outline-light" to="/login">Login</Link>
+        <Link className="btn btn-outline-light" to="/register">Register</Link>
       </div>
     </nav>
   );

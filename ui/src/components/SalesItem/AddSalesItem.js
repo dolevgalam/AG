@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
-import FileUploader from "../files/FileUploader ";
+import FileUploader from "../files/FileUploader";
 
 
 const AddSalesItem = () => {
@@ -32,12 +32,12 @@ const AddSalesItem = () => {
     formData.append("name", name);
     formData.append("file", selectedFile);
   
-    axios
-      .post(UPLOAD_URL, formData)
-      .then((res) => {
-        alert("File Upload success");
-      })
-      .catch((err) => alert("File Upload Error"));
+    // axios
+    //   .post(UPLOAD_URL, formData)
+    //   .then((res) => {
+    //     alert("File Upload success");
+    //   })
+    //   .catch((err) => alert("File Upload Error"));
   };
 
   return (
@@ -46,7 +46,7 @@ const AddSalesItem = () => {
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          // onChange={(e) => setName(e.target.value)}
         />
 
         <FileUploader

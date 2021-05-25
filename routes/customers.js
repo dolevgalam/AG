@@ -15,8 +15,8 @@ router.get('/',async(req,res) => {
     }
 });
 // get specific customer
-router.get('/:specific',async(req,res) => {
-//router.get('/:specific',verify('3'),async(req,res) => {
+//router.get('/:specific',async(req,res) => {
+router.get('/:specific',verify('1'),async(req,res) => {
     try { 
         const customer = await Customer.findOne({id : req.params.specific})
         res.json(customer);

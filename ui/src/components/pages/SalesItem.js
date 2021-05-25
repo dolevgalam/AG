@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 
 const SalesItem = () => {
+  
     const [salesitems, setSalesitems] = useState([]);
 
     useEffect(() => {
@@ -19,8 +20,13 @@ const SalesItem = () => {
       console.log("delete" + " " + name);
       loadAllSalesItem();
     };
+    if(!localStorage.getItem('token')){
+      return <Redirect to='login'/>
+    }
     return (
+     
       <div className="container">
+         {localStorage.getItem('user')}
         <div className="py-4">
          <div class="form-group row"> 
           <h2>Sales item</h2> 
