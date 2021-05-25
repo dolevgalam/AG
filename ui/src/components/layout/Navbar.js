@@ -21,9 +21,9 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+            <li className="nav-item">
               <NavLink className="nav-link" exact to="/">
-              Dashboard
+                Dashboard
               </NavLink>
             </li>
             {/* <li className="nav-item">
@@ -43,7 +43,7 @@ const Navbar = () => {
             </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/salesitem">
-              SalesItem
+                SalesItem
               </NavLink>
             </li>
           </ul>
