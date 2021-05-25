@@ -26,7 +26,7 @@ const SalesItem = () => {
     return (
      
       <div className="container">
-         {localStorage.getItem('user')}
+         {/* {localStorage.getItem('user')} */}
         <div className="py-4">
          <div class="form-group row"> 
           <h2>Sales item</h2> 

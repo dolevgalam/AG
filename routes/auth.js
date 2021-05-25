@@ -7,6 +7,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 router.post('/register', async (req,res) => {
+    console.log("backend register start")
+    console.log(req.body);
     const schema = Joi.object({ 
         id: Joi.string() .min(9) .max(9) .required(),
         password: Joi.string() .min(6) .required(),
@@ -20,7 +22,7 @@ router.post('/register', async (req,res) => {
     });
     
     const validation = schema.validate(req.body);
-    if(validation.error) return res.status(400).send(validation.error.details[0].message);
+    if(validation.error) return console.log(validation.error.details[0].message); //res.status(400).send(validation.error.details[0].message);
     const emailExist = await User.findOne({email:req.body.email});
     if(emailExist) return res.status(400).send("Email already exists");
 

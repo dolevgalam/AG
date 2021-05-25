@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     
       <div className="py-4">
-        {localStorage.getItem('user')}
+        {/* {localStorage.getItem('user')} */}
         <h1>Dashboard</h1>
         
     </div>

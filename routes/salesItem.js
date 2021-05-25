@@ -74,8 +74,8 @@ router.patch('/:specific',upload.single('image'),async(req,res) => {
     }
 });
 // post specific salesItem
-//router.post('/',upload.single('image'), async (req, res) => {
-    router.post('/', async (req, res) => {    
+router.post('/',upload.single('file'), async (req, res) => {
+    //router.post('/', async (req, res) => {    
         console.log(req.body);
     const newsalesItem = new salesItem({
         name: req.body.name,
