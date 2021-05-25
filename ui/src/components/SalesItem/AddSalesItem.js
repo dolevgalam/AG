@@ -31,7 +31,7 @@ function AddSalesItem() {
     <div className="App">
       <header className="App-header">
         <form action="#">
-          <div className="form-control form-control-lg">
+          <div className="form-control form-control-lg form-group">
             <label htmlFor="name">Name</label>
             <input
               type="text"
