@@ -26,16 +26,16 @@ const Navbar = () => {
                 Dashboard
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" exact to="/home">
-                Home
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/orders">
+                Orders
               </NavLink>
-            </li> */}
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" exact to="/about">
-                About
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/quote">
+                Quote
               </NavLink>
-            </li> */}
+            </li>
             {/* <li className="nav-item">
               <NavLink className="nav-link" exact to="/contact">
                 Contact
