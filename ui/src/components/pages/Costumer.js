@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 
-const Orders = () => {
+const Account = () => {
 
-  const [orders, setOrders] = useState([]);
+  const [account, setAccount] = useState([]);
 
   useEffect(() => {
-    loadAllOrders();
+    loadAllAccount();
   }, []);
 
-  const loadAllOrders = async () => {
-    const result = await axios.get("http://localhost:3001/orders");
-    setOrders(result.data.reverse());
+  const loadAllAccount = async () => {
+    const result = await axios.get("http://localhost:3001/account");
+    setAccount(result.data.reverse());
   };
 
-  const deleteOrders = async name => {
-    await axios.delete(`http://localhost:3001/orders/${name}`);
+  const deleteAccount = async name => {
+    await axios.delete(`http://localhost:3001/account/${name}`);
     console.log("delete" + " " + name);
-    loadAllOrders();
+    loadAllAccount();
   };
   if (!localStorage.getItem('token')) {
     return <Redirect to='login' />
@@ -29,8 +29,8 @@ const Orders = () => {
       {/* {localStorage.getItem('user')} */}
       <div className="py-4">
         <div class="form-group row">
-          <h2>Orders</h2>
-          <Link className="btn btn-primary" to={`/orders/add`}>Add New</Link>
+          <h2>Account</h2>
+          <Link className="btn btn-primary" to={`/Account/add`}>Add New</Link>
         </div>
         <table class="table border shadow">
           <thead class="thead-dark">
@@ -44,26 +44,26 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((orders, index) => (
+            {account.map((account, index) => (
               <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{orders._id}</td>
-                <td>{orders.name}</td>
-                <td>{orders.description}</td>
-                <td>{orders.date}</td>
+                <td>{Account._id}</td>
+                <td>{Account.name}</td>
+                <td>{Account.description}</td>
+                <td>{Account.date}</td>
                 { <td>
-                  <Link class="btn btn-info mr-2" to={`/Orders/view/${orders.name}`}>
+                  <Link class="btn btn-info mr-2" to={`/Account/view/${account.name}`}>
                     View
                     </Link>
                   <Link
                     class="btn btn-outline-secondary mr-2"
-                    to={`/Orders/edit/${orders.name}`}
+                    to={`/Account/edit/${account.name}`}
                   >
                     Edit
                     </Link>
                   <Link
                     class="btn btn-danger"
-                    onClick={() => deleteOrders(orders.name)}
+                    onClick={() => deleteAccount(account.name)}
                   >
                     Delete
                     </Link>
@@ -77,4 +77,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Account;

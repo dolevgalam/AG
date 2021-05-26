@@ -27,6 +27,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" exact to="/account">
+                Account
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" exact to="/orders">
                 Orders
               </NavLink>
@@ -36,14 +41,14 @@ const Navbar = () => {
                 Quote
               </NavLink>
             </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link" exact to="/contact">
-                Contact
-              </NavLink>
-            </li> */}
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/salesitem">
                 SalesItem
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/cutting">
+                Cutting
               </NavLink>
             </li>
           </ul>
