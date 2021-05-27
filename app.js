@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 //import routes
 const employeesRoute = require('./routes/employees');
 const usersRoute = require('./routes/users');
-const customersRoute = require('./routes/customers');
+//const customersRoute = require('./routes/customers');
 const authsRoute = require('./routes/auth');
 const salesItemRoute = require('./routes/salesItem');
 const priceQuoteRoute = require('./routes/priceQuote');
@@ -22,7 +22,7 @@ app.use('/cancelpricequote',cancelpriceQuoteRoute);
 app.use('/pricequote',priceQuoteRoute);
 app.use('/salesItem', salesItemRoute);
 app.use('/user', usersRoute);
-app.use('/customer', customersRoute);
+//app.use('/customer', customersRoute);
 app.use('/employee', employeesRoute);
 app.use('/auth', authsRoute);
 

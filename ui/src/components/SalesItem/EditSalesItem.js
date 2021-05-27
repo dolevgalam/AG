@@ -26,7 +26,8 @@ const EditSalesItem = () => {
     console.log("onsubmit-ui");
     e.preventDefault();
     await axios.patch(`http://localhost:3001/salesItem/${id}`, salesItem);
-    history.push("/");
+    alert("Update salesitem successful!");
+    history.push("/salesitem");
   };
 
   const loadSalesItem = async () => {
@@ -39,6 +40,7 @@ const EditSalesItem = () => {
         <h2 className="text-center mb-4">Edit A SalesItem</h2>
         <form onSubmit={e => onSubmit(e)}>
           <div className="form-group">
+          id
             <input
               type="text"
               className="form-control form-control-lg"
@@ -50,6 +52,7 @@ const EditSalesItem = () => {
             />
           </div>
           <div className="form-group">
+          name
             <input
               type="text"
               className="form-control form-control-lg"
@@ -60,6 +63,7 @@ const EditSalesItem = () => {
             />
           </div>
           <div className="form-group">
+          description
             <input
               type="text"
               className="form-control form-control-lg"
@@ -70,6 +74,7 @@ const EditSalesItem = () => {
             />
           </div>
           <div className="form-group">
+          picturepath
             <input
               type="text"
               className="form-control form-control-lg"
@@ -80,6 +85,7 @@ const EditSalesItem = () => {
             />
           </div>
           <div className="form-group">
+          date
             <input
               type="text"
               className="form-control form-control-lg"

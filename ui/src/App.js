@@ -23,8 +23,11 @@ import AddSalesItem from "./components/SalesItem/AddSalesItem";
 import FileUploader from "./components/files/FileUploader";
 import Account from "./components/pages/Costumer";
 
+
+
 function App(props) {
   return (
+
     <Router>
       <div className="App">
         <Navbar />

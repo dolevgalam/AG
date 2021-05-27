@@ -8,8 +8,9 @@ function AddSalesItem() {
   const [file, setFile] = useState();
   const [description, setDescription] = useState();
 
-
+  const history = useHistory();
   const send = event => {
+    
     console.log("send");
     const data = new FormData();
     data.append("name", name);
@@ -21,7 +22,9 @@ function AddSalesItem() {
 
     axios.post("http://localhost:3001/salesItem", data)
       .then(res => alert("success"))
-      .catch(err => console.log(err));
+      history.push("/salesitem");
+    
+      // .catch(err => console.log(err));
   };
 
   return (

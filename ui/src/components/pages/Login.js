@@ -28,6 +28,7 @@ function Login(props) {
             console.log(jwtd._id);
             localStorage.setItem('token', res.data);
             localStorage.setItem('user', res.config.data);
+            alert("welcome " + email)
             history.push("/");
         }).catch(function (err) {
             console.log(err);
@@ -40,12 +41,12 @@ function Login(props) {
     function handleInputChangePass(event) {
         setPassword(event.target.value);
     }
-    
+
     return (
         <Container style={{ marginTop: '100px' }}>
             <Form>
                 <Form.Group controlId="formBasicEmail" style={{ width: '300px' }}> <Form.Label>Email address</Form.Label>
-                    <Form.Control type="text" placeholder="Enter email" name="email" value={email} onChange={handleInputChangeEmail}/>
+                    <Form.Control type="text" placeholder="Enter email" name="email" value={email} onChange={handleInputChangeEmail} />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword" style={{ width: '300px' }}>
@@ -60,7 +61,7 @@ function Login(props) {
                 <Button variant="primary" type="submit" onClick={handleSubmit}>
                     Sign In
             </Button>
-            
+
             </Form>
         </Container>
     );

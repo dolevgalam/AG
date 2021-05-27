@@ -18,6 +18,7 @@ const SalesItem = () => {
     const deleteSalesItem = async name => {
       await axios.delete(`http://localhost:3001/salesItem/${name}`);
       console.log("delete" + " " + name);
+      alert("delete success");
       loadAllSalesItem();
     };
     if(!localStorage.getItem('token')){
