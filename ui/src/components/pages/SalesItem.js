@@ -29,12 +29,12 @@ const SalesItem = () => {
       <div className="container">
          {/* {localStorage.getItem('user')} */}
         <div className="py-4">
-         <div class="form-group row"> 
+         <div className="form-group row"> 
           <h2>Sales item</h2> 
           <Link className="btn btn-primary" to={`/salesItem/add`}>Add New</Link>
           </div>
-          <table class="table border shadow">
-            <thead class="thead-dark">
+          <table className="table border shadow">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">Index</th>
                 <th scope="col">Id</th>
@@ -53,17 +53,17 @@ const SalesItem = () => {
                   <td>{salesItem.description}</td>
                   <td>{salesItem.date}</td>
                   { <td>
-                    <Link class="btn btn-info mr-2" to={`/salesItem/view/${salesItem.name}`}>
+                    <Link className="btn btn-info mr-2" to={`/salesItem/view/${salesItem.name}`}>
                       View
                     </Link>
                     <Link
-                      class="btn btn-outline-secondary mr-2"
+                      className="btn btn-outline-secondary mr-2"
                       to={`/salesItem/edit/${salesItem.name}`}
                     >
                       Edit
                     </Link>
                     <Link
-                      class="btn btn-danger"
+                      className="btn btn-danger"
                       onClick={() => deleteSalesItem(salesItem.name)}
                     >
                       Delete

@@ -21,7 +21,7 @@ import SalesItem_View from "./components/SalesItem/SalesItem";
 import EditSalesItem from "./components/SalesItem/EditSalesItem";
 import AddSalesItem from "./components/SalesItem/AddSalesItem";
 import FileUploader from "./components/files/FileUploader";
-import Account from "./components/pages/Costumer";
+//import Account from "./components/pages/Costumer";
 
 
 
@@ -36,7 +36,7 @@ function App(props) {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/quote" component={Quote} />
           <Route exact path="/cutting" component={Cutting} />
-          <Route exact path="/account" component={Account} />
+          <Route exact path="/costumer" component={Costumer} />
           <Route exact path="/orders" component={Orders} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />

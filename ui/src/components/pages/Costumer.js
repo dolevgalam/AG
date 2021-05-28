@@ -11,12 +11,12 @@ const Account = () => {
   }, []);
 
   const loadAllAccount = async () => {
-    const result = await axios.get("http://localhost:3001/account");
+    const result = await axios.get("http://localhost:3001/customer/");
     setAccount(result.data.reverse());
   };
 
   const deleteAccount = async name => {
-    await axios.delete(`http://localhost:3001/account/${name}`);
+    await axios.delete(`http://localhost:3001/customer//${name}`);
     console.log("delete" + " " + name);
     loadAllAccount();
   };
@@ -28,18 +28,20 @@ const Account = () => {
     <div className="container">
       {/* {localStorage.getItem('user')} */}
       <div className="py-4">
-        <div class="form-group row">
-          <h2>Account</h2>
+        <div className="form-group row">
+          <h2>Costumer</h2>
           <Link className="btn btn-primary" to={`/Account/add`}>Add New</Link>
         </div>
-        <table class="table border shadow">
-          <thead class="thead-dark">
+        <table className="table border shadow">
+          <thead className="thead-dark">
             <tr>
               <th scope="col">Index</th>
               <th scope="col">Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Date</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              <th scope="col">City</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -47,22 +49,24 @@ const Account = () => {
             {account.map((account, index) => (
               <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{Account._id}</td>
-                <td>{Account.name}</td>
-                <td>{Account.description}</td>
-                <td>{Account.date}</td>
+                <td>{account.id}</td>
+                <td>{account.firstname}</td>
+                <td>{account.lastname}</td>
+                <td>{account.phone}</td>
+                <td>{account.email}</td>
+                <td>{account.city}</td>
                 { <td>
-                  <Link class="btn btn-info mr-2" to={`/Account/view/${account.name}`}>
+                  <Link className="btn btn-info mr-2" to={`/Account/view/${account.name}`}>
                     View
                     </Link>
                   <Link
-                    class="btn btn-outline-secondary mr-2"
+                    className="btn btn-outline-secondary mr-2"
                     to={`/Account/edit/${account.name}`}
                   >
                     Edit
                     </Link>
                   <Link
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                     onClick={() => deleteAccount(account.name)}
                   >
                     Delete
