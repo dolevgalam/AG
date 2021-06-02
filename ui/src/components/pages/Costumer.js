@@ -5,6 +5,9 @@ import { Link, Redirect } from "react-router-dom";
 const Account = () => {
 
   const [account, setAccount] = useState([]);
+  const [accountfilter, setAccountfilter] = useState([]);
+  const [search, setSearch] = useState([]);
+  
 
   useEffect(() => {
     loadAllAccount();
@@ -13,27 +16,36 @@ const Account = () => {
   const loadAllAccount = async () => {
     const result = await axios.get("http://localhost:3001/customer/");
     setAccount(result.data.reverse());
+    setAccountfilter(result.data.reverse());
   };
 
   const deleteAccount = async name => {
-    await axios.delete(`http://localhost:3001/customer//${name}`);
-    console.log("delete" + " " + name);
-    loadAllAccount();
+    if (window.confirm('Are you sure you wish to delete this item?')){
+      await axios.delete(`http://localhost:3001/customer//${name}`);
+      console.log("delete" + " " + name);
+      loadAllAccount();
+    }
   };
+  function handleInputChangeSearch(event) {
+    setSearch(event.target.value);
+    const filtered = account.filter( (column) => 
+    (column.phone.toLowerCase().includes(event.target.value))||(column.id.toLowerCase().includes(event.target.value))
+    || column.firstname.toLowerCase().includes(event.target.value));
+     setAccountfilter(filtered);
+}
+
   if (!localStorage.getItem('token')) {
     return <Redirect to='login' />
   }
   return (
-
-    <div className="container">
+    <div className="container container-fluid container-md">
       {/* {localStorage.getItem('user')} */}
-      <div className="py-4">
-        <div className="form-group row">
-          <h2>Costumer</h2>
-          <Link className="btn btn-primary" to={`/Account/add`}>Add New</Link>
-        </div>
-        <table className="table border shadow">
-          <thead className="thead-dark">
+        <h2 style={{marginLeft: 20}}>  Costumer</h2>
+        <div className="contanier container-fluid">
+          <input type = "text" style={{marginLeft:0 ,width: "250px"}}value={search} placeholder="Type for Search..." onChange= {handleInputChangeSearch}></input>
+          <Link className="btn btn-primary" style={{right:0 ,marginLeft: 730}} to={`/Account/add`}>Add New</Link>
+        <table className="table border shadow table-striped table-hover mt-xl-4">
+          <thead className="thead-dark" style={{textAlign: "center"}}>
             <tr>
               <th scope="col">Index</th>
               <th scope="col">Id</th>
@@ -45,9 +57,9 @@ const Account = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
-            {account.map((account, index) => (
-              <tr>
+          <tbody >
+            {accountfilter.map((account, index) => (
+              <tr style={{textAlign: "center"}}>
                 <th scope="row">{index + 1}</th>
                 <td>{account.id}</td>
                 <td>{account.firstname}</td>

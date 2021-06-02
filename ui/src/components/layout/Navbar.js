@@ -51,6 +51,11 @@ const Navbar = () => {
                 Cutting
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/contactus">
+              Contact Us
+              </NavLink>
+            </li>
           </ul>
         </div>
         <Link className="btn btn-outline-light" to="/login">Login</Link>

@@ -23,7 +23,6 @@ const EditSalesItem = () => {
   }, []);
 
   const onSubmit = async e => {
-    console.log("onsubmit-ui");
     e.preventDefault();
     await axios.patch(`http://localhost:3001/salesItem/${id}`, salesItem);
     alert("Update salesitem successful!");

@@ -20,10 +20,7 @@ import SalesItem from "./components/pages/SalesItem";
 import SalesItem_View from "./components/SalesItem/SalesItem";
 import EditSalesItem from "./components/SalesItem/EditSalesItem";
 import AddSalesItem from "./components/SalesItem/AddSalesItem";
-import FileUploader from "./components/files/FileUploader";
-//import Account from "./components/pages/Costumer";
-
-
+import ContactUs from "./components/pages/ContactUs";
 
 function App(props) {
   return (
@@ -31,7 +28,6 @@ function App(props) {
     <Router>
       <div className="App">
         <Navbar />
-
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/quote" component={Quote} />
@@ -47,7 +43,8 @@ function App(props) {
           <Route exact path="/salesitem/view/:id" component={SalesItem_View} />
           <Route exact path="/salesitem/edit/:id" component={EditSalesItem} />
           <Route exact path="/salesitem/add" component={AddSalesItem} />
-
+          <Route exact path="/contactus" component={ContactUs} />
+          
 
           <Route component={NotFound} />
         </Switch>
