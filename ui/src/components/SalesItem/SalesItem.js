@@ -16,7 +16,7 @@ const SalesItem = () => {
   }, []);
   const loadSalesItem = async () => {
     const res = await axios.get(`http://localhost:3001/salesItem/${id}`);
-    console.log(res.data);
+    console.log(res);
     if(res.data!=null){
       console.log(res);
       res.data.picturepath = 'http://localhost:3001' + res.data.picturepath

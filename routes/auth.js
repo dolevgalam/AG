@@ -5,10 +5,19 @@ const Customer = require('../models/customer');
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
+//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
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth:{
+        api_key:"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"
+    }
+}))
 router.post('/register', async (req,res) => {
     console.log("backend register start")
-    console.log(req.body);
+    //console.log(req.body);
     const schema = Joi.object({ 
         id: Joi.string() .min(9) .max(9) .required(),
         password: Joi.string() .min(6) .required(),
@@ -22,13 +31,12 @@ router.post('/register', async (req,res) => {
     });
     
     const validation = schema.validate(req.body);
-    if(validation.error) return console.log(validation.error.details[0].message); //res.status(400).send(validation.error.details[0].message);
+    if(validation.error) return res.status(400).send(validation.error.details[0].message);
     const emailExist = await User.findOne({email:req.body.email});
     if(emailExist) return res.status(400).send("Email already exists");
-
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
-
+    console.log("line 39");
     try{
         const user = new User({
             email: req.body.email,
@@ -46,9 +54,16 @@ router.post('/register', async (req,res) => {
             phone: req.body.phone,
         });
         const savedCustomer = await customer.save();
+        console.log("line 57");
+        transporter.sendMail({
+            to:req.body.email,
+            from:"galamdolev@gmail.com",
+            subject:"Welcome - Registration Successfull",
+            html:"<h1> welcome to ag!!! </h1>"
+        })
         res.send("Done");
     } catch (err){
-        res.json({ message:err});
+        res.json({ message:err.message});
     }
 });
 
@@ -59,13 +74,14 @@ router.post('/login', async (req,res) => {
     
     const validation = schema.validate(req.body);
     if(validation.error) return res.status(200).send(validation.error.details[0].message);
-    
+
     const user = await User.findOne({email:req.body.email});
     if(!user) return res.status(200).send("Email not exists");
     const validPass = await bcrypt.compare(req.body.password,user.password);
     if(!validPass) return res.status(200).send("Incorrect password");
     try{
         const token = jwt.sign({_id: user._id},process.env.TOKEN_SECRET);
+
         res.header('auth-token',token).send(token);
 
     } catch (err){

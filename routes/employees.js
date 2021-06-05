@@ -2,11 +2,35 @@ const express = require('express');
 const router = express.Router();
 const Employee = require('../models/employee');
 const verify = require('./verfiyToken');
+const multer = require('multer');
 
+//define storage for the images
+const storage = multer.diskStorage({
+    //destination for files
+    destination: function (request, file, callback) {
+      callback(null, './public/images');
+    },
+  
+    //add back the extension
+    filename: function (request, file, callback) {
+      callback(null,file.originalname);
+    },
+  });
+  
+  //upload parameters for multer
+  const upload = multer({
+    storage: storage,
+    limits: {
+      fieldSize: 1024 * 1024 * 3,
+    },
+  });
+
+//specific
 // get all employees
 router.get('/',async(req,res) => {
 //router.get('/',verify,async(req,res) => {
     try{
+        console.log("get all emp");
         const employees = await Employee.find();
         res.json(employees);
     } catch (err){
@@ -14,22 +38,31 @@ router.get('/',async(req,res) => {
     }
 });
 // get specific employee
-router.get('/:employeeID',async(req,res) => {;
+router.get('/:specific',async(req,res) => {;
     try { 
-        const employee = await Employee.findById(req.params.employeeID);
+        const employee = await Employee.findById(req.params.specific);
         res.json(employee);
     }catch(err) {
         res.json({ message: err});
     }
 });
 // post specific employee
-router.post('/', async (req,res) => {
+router.post('/',upload.single('file') ,async (req,res) => {
+    console.log(req.body);
     const employee = new Employee({
-      title: req.body.title,
-      description: req.body.description  
+        _id: req.body.id,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        dateofbirth: req.body.dateofbirth,
+        city: req.body.city,
+        address: req.body.address,
+        phone: req.body.phone,
+        picturepath: "/images/" + req.file.filename,
     });
     try{
         const savedEmployee = await employee.save();
+        console.log(savedEmployee);
         res.json(savedEmployee);    
     } catch (err){
         res.json({ message:err});
@@ -37,35 +70,34 @@ router.post('/', async (req,res) => {
 });
 
 // delete specific employee
-router.delete('/:employeeID',async(req,res) => {
+router.delete('/:specific',async(req,res) => {
     try { 
-        const removeEmployee = await Employee.deleteOne({_id : req.params.employeeID});
+        console.log("delete");
+        const removeEmployee = await Employee.deleteOne({_id : req.params.specific});
         res.json(removeEmployee);
     }catch(err) {
-        res.json({ message: err});
+        res.json({ message: err.message});
     }
 });
 
 // update specific employee
-router.patch('/:employeeID',async(req,res) => {
+router.patch('/:specific',async(req,res) => {
     try { 
+        console.log("backend update");
         const updateEmployee = await Employee.updateOne(
-        {_id : req.params.employeeID},
-        {$set: {title:req.body.title}});
+        {_id : req.params.specific},
+        {$set: {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            dateofbirth: req.body.dateofbirth,
+            phone: req.body.phone,
+        }});
+        console.log(updateEmployee);
         res.json(updateEmployee);
     }catch(err) {
         res.json({ message: err});
     }
 });
 
-// get my id
-
-router.get('/getmyid',async(req,res) => {
-//router.get('/getmyid',verify,async(req,res) => {
-    try { 
-        res.json(req.user);
-    }catch(err) {
-        res.json({ message: err});
-    }
-});
 module.exports = router;

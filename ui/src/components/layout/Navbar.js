@@ -21,6 +21,11 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+              <NavLink className="nav-link" exact to="/">
+              {localStorage.getItem('mail')}
+              </NavLink>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/">
                 Dashboard
@@ -54,6 +59,9 @@ const Navbar = () => {
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/contactus">
               Contact Us
+              </NavLink>
+              <NavLink className="nav-link" exact to="/employee">
+              Employees
               </NavLink>
             </li>
           </ul>

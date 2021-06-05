@@ -28,6 +28,7 @@ function Login(props) {
             console.log(jwtd._id);
             localStorage.setItem('token', res.data);
             localStorage.setItem('user', res.config.data);
+            localStorage.setItem('mail', email);
             alert("welcome " + email)
             history.push("/");
         }).catch(function (err) {
