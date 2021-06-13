@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Container, } from 'react-bootstrap'
 import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 /*"id": "123456789",
 "firstname": "Dolev",
 "lastname": "Galam",
@@ -43,7 +43,7 @@ export default class Register extends Component {
     }).then(function (res) {
       console.log(res);
       alert("success");
-      return <Redirect to='login' />
+      //history.push("/login");
       //localStorage.setItem('token', res.data.access);
       //localStorage.setItem('user', res.config.data);
     }).catch(function (err) {
