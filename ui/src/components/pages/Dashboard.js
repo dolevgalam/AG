@@ -1,8 +1,9 @@
-import React, { useState, useEffect,Component } from "react";
+import React from 'react';
 import axios from "axios";
 import { Link ,Redirect} from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({setTest}) => {
+  setTest('2');
   if(!localStorage.getItem('token')){
     return <Redirect to='login'/>
   }
@@ -18,3 +19,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+// 1 - customer
+// other - employee

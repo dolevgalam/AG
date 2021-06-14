@@ -30,7 +30,7 @@ function Login(props) {
             localStorage.setItem('user', res.config.data);
             localStorage.setItem('mail', email);
             alert("welcome " + email)
-            history.push("/");
+            history.push("/");  
         }).catch(function (err) {
             console.log(err);
         })

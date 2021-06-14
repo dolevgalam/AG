@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import {
@@ -27,14 +27,15 @@ import AddEmployee from "./components/employee/AddEmployee";
 import EditEmployee from "./components/employee/EditEmployee";
 
 
-function App(props) {
+function App() {
+  const [test, setTest] = useState();
   return (
 
     <Router>
       <div className="App">
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Dashboard} />
+        <Navbar test={test}/>
+        <Switch >
+          <Route exact path="/" render={() => <div><Dashboard setTest={setTest}/></div>} />
           <Route exact path="/quote" component={Quote} />
           <Route exact path="/cutting" component={Cutting} />
           <Route exact path="/costumer" component={Costumer} />
@@ -53,9 +54,6 @@ function App(props) {
           <Route exact path="/employee/view/:id" component={Employee_View} />
           <Route exact path="/employee/add" component={AddEmployee} />
           <Route exact path="/employee/edit/:id" component={EditEmployee} />
-
-          
-
           <Route component={NotFound} />
         </Switch>
       </div>
