@@ -28,19 +28,22 @@ import EditEmployee from "./components/employee/EditEmployee";
 
 
 function App() {
-  const [test, setTest] = useState();
+  const [test, setTest] = useState('1');
+  const [alert, setAlert] = useState({severity:"",message:"",status:0});
+
   return (
 
     <Router>
       <div className="App">
-        <Navbar test={test}/>
+        <Navbar test={test} alert={alert}/>
         <Switch >
           <Route exact path="/" render={() => <div><Dashboard setTest={setTest}/></div>} />
           <Route exact path="/quote" component={Quote} />
           <Route exact path="/cutting" component={Cutting} />
           <Route exact path="/costumer" component={Costumer} />
           <Route exact path="/orders" component={Orders} />
-          <Route exact path="/login" component={Login} />
+          {/* <Route exact path="/login" component={Login} /> */}
+          <Route exact path="/login" render={() => <div><Login setAlert={setAlert}/></div>} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/users/add" component={AddUser} />
           <Route exact path="/users/edit/:id" component={EditUser} />

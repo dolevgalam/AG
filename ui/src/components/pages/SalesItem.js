@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
-
+import Demo from './../layout/demo'
 const SalesItem = () => {
 
   const [salesitems, setSalesitems] = useState([]);
   const [salesitemsfilter, setSalesitemsfilter] = useState([]);
   const [search, setSearch] = useState([]);
+  const [deleteopen, setDeleteopen] = useState(false);
 
   useEffect(() => {
     loadAllSalesItem();
@@ -19,12 +20,13 @@ const SalesItem = () => {
   };
 
   const deleteSalesItem = async name => {
-    if (window.confirm('Are you sure you wish to delete this item?')) {
-      await axios.delete(`http://localhost:3001/salesItem/${name}`);
-      console.log("delete" + " " + name);
-      alert("delete success");
-      loadAllSalesItem();
-    }
+    setDeleteopen(true)
+    // if (window.confirm('Are you sure you wish to delete this item?')) {
+    //   await axios.delete(`http://localhost:3001/salesItem/${name}`);
+    //   console.log("delete" + " " + name);
+    //   alert("delete success");
+    //   loadAllSalesItem();
+    // }
   };
 
   function handleInputChangeSearch(event) {
@@ -43,11 +45,12 @@ const SalesItem = () => {
     <div className="container container-fluid container-md">
       {/* {localStorage.getItem('user')} */}
       <h2 style={{ marginLeft: 20 }}>  Sales items</h2>
+      <Demo test="234324" open={deleteopen}> </Demo>
       <div className="contanier container-fluid">
         <input type="text" style={{ marginLeft: 0, width: "250px" }} value={search} placeholder="Type for Search..." onChange={handleInputChangeSearch}></input>
         <Link className="btn btn-primary" style={{ right: 0, marginLeft: 730 }} to={`/salesItem/add`}>Add New</Link>
         <table className="table border shadow table-striped table-hover mt-xl-4">
-          <thead className="thead-dark" style={{textAlign: "center"}}>
+          <thead className="thead-dark" style={{ textAlign: "center" }}>
             <tr>
               <th scope="col">Index</th>
               <th scope="col">Id</th>
@@ -59,7 +62,7 @@ const SalesItem = () => {
           </thead>
           <tbody>
             {salesitemsfilter.map((salesItem, index) => (
-              <tr style={{textAlign: "center"}}>
+              <tr style={{ textAlign: "center" }}>
                 <th scope="row">{index + 1}</th>
                 <td>{salesItem._id}</td>
                 <td>{salesItem.name}</td>
@@ -77,7 +80,9 @@ const SalesItem = () => {
                     </Link>
                   <Link
                     className="btn btn-danger"
-                    onClick={() => deleteSalesItem(salesItem.name)}
+                    onClick={() => {
+                      deleteSalesItem(salesItem.name)
+                    }}
                   >
                     Delete
                     </Link>
