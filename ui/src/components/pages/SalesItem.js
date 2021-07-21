@@ -45,7 +45,6 @@ const SalesItem = () => {
     <div className="container container-fluid container-md">
       {/* {localStorage.getItem('user')} */}
       <h2 style={{ marginLeft: 20 }}>  Sales items</h2>
-      <Demo test="234324" open={deleteopen}> </Demo>
       <div className="contanier container-fluid">
         <input type="text" style={{ marginLeft: 0, width: "250px" }} value={search} placeholder="Type for Search..." onChange={handleInputChangeSearch}></input>
         <Link className="btn btn-primary" style={{ right: 0, marginLeft: 730 }} to={`/salesItem/add`}>Add New</Link>
@@ -78,14 +77,15 @@ const SalesItem = () => {
                   >
                     Edit
                     </Link>
-                  <Link
+                  {/* <Link
                     className="btn btn-danger"
                     onClick={() => {
                       deleteSalesItem(salesItem.name)
                     }}
                   >
                     Delete
-                    </Link>
+                    </Link> */}
+                    <Demo path={`http://localhost:3001/salesItem/${salesItem.name}`}/>
                 </td>}
               </tr>
             ))}
