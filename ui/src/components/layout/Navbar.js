@@ -54,7 +54,7 @@ const Navbar = ({ test , alert } ) => {
             </NavLink>
               </li> : null}
               {test == '2' ? <li className="nav-item">
-                <NavLink className="nav-link" exact to="/quote">
+                <NavLink className="nav-link" exact to="/pricequote">
                   Quote
             </NavLink>
               </li> : null}

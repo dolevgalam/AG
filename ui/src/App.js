@@ -4,7 +4,6 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import {
   BrowserRouter as Router, Route, Switch, withRouter
 } from "react-router-dom";
-import Quote from "./components/pages/Quote";
 import Cutting from "./components/pages/Cutting";
 import Orders from "./components/pages/Orders";
 import Navbar from "./components/layout/Navbar";
@@ -25,6 +24,11 @@ import Employee from "./components/pages/Employee";
 import Employee_View from "./components/employee/employee";
 import AddEmployee from "./components/employee/AddEmployee";
 import EditEmployee from "./components/employee/EditEmployee";
+import Pricequote from "./components/pages/pricequote";
+import AddPricequote from "./components/pricequote/AddPricequote";
+import EditPricequote from "./components/pricequote/EditPricequote";
+import ViewPricequote from "./components/pricequote/ViewPricequote";
+
 
 
 function App() {
@@ -38,7 +42,6 @@ function App() {
         <Navbar test={test} alert={alert}/>
         <Switch >
           <Route exact path="/" render={() => <div><Dashboard setTest={setTest}/></div>} />
-          <Route exact path="/quote" component={Quote} />
           <Route exact path="/cutting" component={Cutting} />
           <Route exact path="/costumer" component={Costumer} />
           <Route exact path="/orders" component={Orders} />
@@ -57,6 +60,10 @@ function App() {
           <Route exact path="/employee/view/:id" component={Employee_View} />
           <Route exact path="/employee/add" component={AddEmployee} />
           <Route exact path="/employee/edit/:id" component={EditEmployee} />
+          <Route exact path="/pricequote" component={Pricequote} />
+          <Route exact path="/pricequote/view/:id" component={ViewPricequote} />
+          <Route exact path="/pricequote/add" component={AddPricequote} />
+          <Route exact path="/pricequote/edit/:id" component={EditPricequote} />
           <Route component={NotFound} />
         </Switch>
       </div>
