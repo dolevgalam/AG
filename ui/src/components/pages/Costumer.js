@@ -49,8 +49,8 @@ const Account = () => {
             <tr>
               <th scope="col">Index</th>
               <th scope="col">Id</th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
+              <th scope="col">F.Name</th>
+              <th scope="col">L.Name</th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
               <th scope="col">City</th>
@@ -67,7 +67,7 @@ const Account = () => {
                 <td>{account.phone}</td>
                 <td>{account.email}</td>
                 <td>{account.city}</td>
-                { <td>
+                { <td className="d-flex">
                   <Link className="btn btn-info mr-2" to={`/Account/view/${account.name}`}>
                     View
                     </Link>

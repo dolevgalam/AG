@@ -57,7 +57,7 @@ const Pricequote = () => {
                 <td>{pricequote.description}</td>                
                 <td>{pricequote.price}</td>
                 <td>{pricequote.status}</td>
-                { <td>
+                { <td className="d-flex justify-content-center">
                   <Link className="btn btn-info mr-2" to={`/pricequote/view/${pricequote._id}`}>
                     View
                     </Link>

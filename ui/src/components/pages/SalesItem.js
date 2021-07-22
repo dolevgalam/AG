@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import Demo from './../layout/demo'
+import './SalesItem.css';
+
 const SalesItem = () => {
 
   const [salesitems, setSalesitems] = useState([]);
@@ -56,7 +58,7 @@ const SalesItem = () => {
                 <td>{salesItem.name}</td>
                 <td>{salesItem.description}</td>
                 <td>{salesItem.date}</td>
-                { <td>
+                { <td className="d-flex">
                   <Link className="btn btn-info mr-2" to={`/salesItem/view/${salesItem.name}`}>
                     View
                     </Link>

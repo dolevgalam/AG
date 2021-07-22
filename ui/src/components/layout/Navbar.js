@@ -38,11 +38,15 @@ const Navbar = ({ test , alert } ) => {
                   {localStorage.getItem('mail')}
                 </NavLink>
               </li>
-              {test == '2' ? <li className="nav-item">
-                <NavLink className="nav-link" exact to="/">
-                  Dashboard
-            </NavLink>
-              </li> : null}
+              <li class="nav-item">
+						<span class="badge badge-pill badge-danger" style={{float:'right',marginBottom:'-20px'}}>1</span>
+						<a class="nav-link" href="messages">Dashboard <span class="sr-only">(current)</span></a>
+					</li>
+                {/* {test == '2' ? <li className="nav-item">
+                  <NavLink className="nav-link" exact to="/">
+                    Dashboard
+              </NavLink>
+                </li> : null} */}
               {test == '2' ? <li className="nav-item">
                 <NavLink className="nav-link" exact to="/costumer">
                   Costumer
@@ -80,8 +84,10 @@ const Navbar = ({ test , alert } ) => {
               </li> : null}
             </ul>
           </div>
-          <Link className="btn btn-outline-light" to="/login">Login</Link>
-          <Link className="btn btn-outline-light" to="/register">Register</Link>
+          <div className="mr-2">
+          <Link className="btn btn-outline-light mr-2" to="/login">Login</Link>
+          <Link className="btn btn-outline-light ml-2" to="/register">Register</Link>
+          </div>
         </div>
       </nav>
       <div>
