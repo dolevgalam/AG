@@ -14,6 +14,7 @@ const Pricequote = () => {
 
   const loadAllSalesItem = async () => {
     const result = await axios.get("http://localhost:3001/pricequote");
+    console.log(result.data.reverse())
     setpricequote(result.data.reverse());
     setpricequotefilter(result.data.reverse());
   };
@@ -32,8 +33,8 @@ const Pricequote = () => {
   }
   return (
     <div className="container container-fluid container-md">
-      <h2 style={{ marginLeft: 20 }}>  Price Quote</h2>
       <div className="contanier container-fluid">
+        <br/>
         <input type="text" style={{ marginLeft: 0, width: "250px" }} value={search} placeholder="Type for Search..." onChange={handleInputChangeSearch}></input>
         <Link className="btn btn-primary" style={{ right: 0, marginLeft: 730 }} to={`/pricequote/add`}>Add New</Link>
         <table className="table border shadow table-striped table-hover mt-xl-4">
@@ -41,6 +42,7 @@ const Pricequote = () => {
             <tr>
               <th scope="col">Index</th>
               <th scope="col">Id</th>
+              <th scope="col">Customer</th>
               <th scope="col">Date</th>
               <th scope="col">Description</th>
               <th scope="col">Price</th>
@@ -53,6 +55,7 @@ const Pricequote = () => {
               <tr style={{ textAlign: "center" }}>
                 <th scope="row">{index + 1}</th>
                 <td>{pricequote._id}</td>
+                <td>{pricequote.customer}</td>
                 <td>{pricequote.date}</td>
                 <td>{pricequote.description}</td>                
                 <td>{pricequote.price}</td>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import FileUploader from "../files/FileUploader";
@@ -10,16 +10,34 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button'
+import Box from '@material-ui/core/Box';
+import Input from '@material-ui/core/Input';
 
 
-function Addpricequote() {
+function Addpricequote({ setAlert }) {
 
   const [saleitem, setSaleitem] = useState();
   const [file, setFile] = useState();
   const [description, setDescription] = useState();
+  const [date, setDate] = useState();
+  const [fullname, setFullname] = useState();
+
+
   const childRef = useRef();
-  const [checked, setChecked] = React.useState(false);
+  const descRef = useRef();
   const history = useHistory();
+  const options = ['יוטה', 'רשת צל', 'סגירת מרפסת'];
+
+  useEffect(() => {
+      axios.get("http://localhost:3001/customer/email/" + localStorage.getItem('mail'))
+       .then(res=>{
+          setFullname(res.data.firstname + " " + res.data.lastname)
+       });
+
+  });
 
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -31,107 +49,122 @@ function Addpricequote() {
     },
   }));
   const classes = useStyles();
-  const handleChange = (event) => {
-    console.log(event.target.checked)
-    setChecked(event.target.checked);
-  };
   const send = event => {
+    window.scrollTo(0, 0)
     console.log("send");
+    var dt = new Date()
+    var fulldate = dt.getDate() + "" + (dt.getMonth() + 1) + "" + (dt.getFullYear() - 2000);
+    var fulltime = dt.getHours() + "" + dt.getMinutes() + "" + dt.getSeconds();
+    var datenow = `${dt.getFullYear().toString().padStart(4, '0')}-${(dt.getMonth() + 1).toString().padStart(2, '0')}-${dt.getDate().toString().padStart(2, '0')}T${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}`
+    var fulldatetime = "1" + "" + fulldate + "" + fulltime
     const data = new FormData();
-    // data.append("name", name);
     data.append("file", file);
     data.append("description", description);
-    // console.log(name);
-    console.log(file);
-    console.log(description);
-
+    data.append("saleitem", saleitem);
+    data.append("date", date);
+    data.append("canvas", childRef.current.getSaveData());
+    data.append("customer", localStorage.getItem('mail'))
+    data.append("id", fulldatetime)
+    data.append("datenow", datenow)
+    data.append("fullname", fullname)
     axios.post("http://localhost:3001/pricequote", data)
-      .then(res => alert("success"))
-    history.push("/pricequote");
+      .then(function (res) {
+        fulldatetime = fulldatetime + " הצעת המחיר שלך הועלתה בהצלחה! מספר ההצעה הוא "
+        setAlert({ severity: "success", message: fulldatetime, status: 1 })
+        setTimeout(() => {
+          setAlert({ status: 0 })
+          history.push("/pricequote");
+        }, 2000);
+      })
+      .catch(err => console.log(err));
 
-    // .catch(err => console.log(err));
   };
-
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-5">
-        <h2 className="text-center mb-4">Add A pricequote</h2>
+        <h2 className="text-center mb-4"> הזן את הנתונים עבור הצעת המחיר</h2>
         <div className="App">
           <header className="App-header">
             <form action="#">
-              <FormControl className={classes.formControl}>
-                <InputLabel shrink htmlFor="age-native-label-placeholder">
-                  אנא בחר פריט מכירה
-        </InputLabel>
-                <NativeSelect
-                  value={saleitem}
-                  onChange={event => {
-                    const { value } = event.target;
-                    setSaleitem(value);
+              <div>
+                <TextField
+                  id="datetime-local"
+                  onChange={(event) => {
+                    setDate(event.target.value);
                   }}
-                  inputProps={{
-                    name: 'age',
-                    id: 'age-native-label-placeholder',
-                  }}
-                >
-                  <option value="">None</option>
-                  <option value={10}>כיסא</option>
-                  <option value={20}>ספה</option>
-                  <option value={30}>רשת צל</option>
-                </NativeSelect>
-              </FormControl>
-              {/* <div className="form-control form-control-lg form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  onChange={event => {
-                    const { value } = event.target;
-                    setName(value);
+                  label="מועד אספקה רצוי"
+                  type="datetime-local"
+                  defaultValue="2020-07-24T10:30"
+                  className={classes.textField}
+                  fullWidth="true"
+                  InputLabelProps={{
+                    shrink: true,
                   }}
                 />
-              </div> */}
-              <div className="form-control form-control-lg">
-                <label htmlFor="description">Description</label>
-                <input
-                  type="text"
-                  id="description"
-                  onChange={event => {
-                    const { value } = event.target;
-                    setDescription(value);
+                <br />
+                <br />
+                <Autocomplete
+                  className="mb-4"
+                  inputValue={saleitem}
+                  onInputChange={(event, newInputValue) => {
+                    setSaleitem(newInputValue);
                   }}
+                  id="controllable-states-demo"
+                  options={options}
+                  style={{ fullWidth: "true" }}
+                  renderInput={(params) => <TextField {...params} label="פריט מכירה" variant="outlined" />}
                 />
               </div>
-              <div className="form-control form-control-lg">
-                <label htmlFor="file">File</label>
-                <input
-                  type="file"
-                  id="file"
-                  accept=".jpg"
-                  onChange={event => {
-                    const file = event.target.files[0];
-                    setFile(file);
-                  }}
-                />
-              </div>
+              <TextField
+                onChange={(event) => {
+                  setDescription(event.target.value);
+                }}
+                className="mb-4"
+                id="outlined-multiline-static"
+                label="תיאור מילולי"
+                multiline
+                rows={10}
+                defaultValue="אנא תאר את הפריט שברצונך להזמין , ככל שהתיאור יהיה מפורט יותר כך נוכל לעזור לך בצורה מיטבית ואיכותית"
+                variant="outlined"
+                fullWidth="true"
+              />
+              <p style={{ textAlign: "right" }} > ברשותך מערכת שתוכל לשרטט את הדרישה שלך</p>
               <CanvasDraw ref={childRef}
+                className="mb-4"
                 style={{
                   boxShadow:
                     "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)"
                 }}
-                canvasWidth={700}
-                canvasHeight={800}
+                canvasWidth={740}
+                canvasHeight={500}
                 brushRadius={2}
               />
-              <Checkbox
-                onChange={handleChange}
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }} />
             </form>
-            <button className="btn btn-primary btn-block" onClick={() => childRef.current.undo()}>undo</button>
-            <button className="btn btn-primary btn-block" onClick={() => childRef.current.clear()}>clear</button>
-            <button className="btn btn-primary btn-block" onClick={() => localStorage.test = childRef.current.getSaveData()}>save</button>
-            <button className="btn btn-primary btn-block" onClick={() => childRef.current.loadSaveData(localStorage.test)}>load</button>
+            <div className="d-flex justify-content-between">
+              <Button variant="contained" color="primary" component="span" onClick={() => childRef.current.undo()}>undo</Button>
+              <Button variant="contained" color="secondary" component="span" onClick={() => childRef.current.clear()}>clear</Button>
+              <Button variant="contained" color="primary" component="span" onClick={() => localStorage.test = childRef.current.getSaveData()}>save</Button>
+              <Button variant="contained" color="primary" component="span" onClick={() => childRef.current.loadSaveData(localStorage.test)}>load</Button>
+            </div >
+            <p className="d-flex justify-content-between mr-4 mt-4" style={{ textAlign: "right" }}>
+              <Input
+                style={{ display: "none" }}
+                id="contained-button-file"
+                type="file"
+                onChange={event => {
+                  const file = event.target.files[0];
+                  setFile(file);
+                }}
+              />
+              <label htmlFor="contained-button-file">
+                <Button variant="contained" color="primary" component="span">
+                  Upload files
+                  </Button>
+              </label>
+            במידה וברצונך לצרף קבצים - חשוב לשים לב שגודל הקובץ מוגבל ל-5 מגה
+            </p>
+            <form className={classes.container} noValidate>
+            </form>
             <button className="btn btn-primary btn-block" onClick={send}>Add pricequote</button>
           </header>
         </div>

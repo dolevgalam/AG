@@ -1,15 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../cutting/Cutting.css';
 import randomColor from "randomcolor";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
 // import { DndContext } from '@dnd-kit/core';
 // import { Draggable } from '../cutting/Draggable';
 // import { Droppable } from '../cutting/Droppable';
 
 
-
+const options = ['יוטה', 'רשת צל', 'סגירת מרפסת'];
 const color1 = randomColor()
 const color2 = randomColor()
 const Cutting = () => {
+  const useStyles = makeStyles((theme) => ({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
+  }));
+const [saleitem, setSaleitem] = useState();
+const classes = useStyles();
+const [open, setOpen] = React.useState(false);
+const handleClose = () => {
+  setOpen(false);
+};
+const handleToggle = () => {
+  setOpen(!open);
+};
 
 
   // const [hex, setHex] = useState('');
@@ -23,8 +45,19 @@ const Cutting = () => {
   const canvas = useRef();
   let ctx = null;
   const boxes = [
-    { x: 200, y: 220, w: 100, h: 50 },
-    { x: 100, y: 120, w: 100, h: 50 }
+    { x: 50, y: 100, w: 80, h: 40 },
+    { x: 100, y: 200, w: 40, h: 120 },
+    { x: 200, y: 270, w: 60, h: 90 },
+    { x: 350, y: 320, w: 30, h: 50 },
+    { x: 380, y: 400, w: 100, h: 70 }
+  ]
+
+  const boxes1 = [
+    { x: 550, y: 100, w: 80, h: 40 },
+    { x: 600, y: 200, w: 40, h: 120 },
+    { x: 700, y: 270, w: 60, h: 90 },
+    { x: 1050, y: 320, w: 30, h: 50 },
+    { x: 1080, y: 400, w: 100, h: 70 }
   ]
   let isDown = false;
   let dragTarget = null;
@@ -66,6 +99,13 @@ const Cutting = () => {
     ctx.clearRect(0, 0, canvas.current.clientWidth, canvas.current.clientHeight);
     drawLine({ x1: canvas.current.clientHeight, y1: canvas.current.clientWidth/2, x2: canvas.current.clientHeight, y2: 0 });
     boxes.map(info => drawRect(info));
+    
+  }
+
+  const draw2 = () => {
+    ctx.clearRect(0, 0, canvas.current.clientWidth, canvas.current.clientHeight);
+    drawLine({ x1: canvas.current.clientHeight, y1: canvas.current.clientWidth/2, x2: canvas.current.clientHeight, y2: 0 });
+    boxes1.map(info => drawRect(info));
     
   }
 
@@ -134,8 +174,41 @@ const Cutting = () => {
 
   return (
     <div className="App">
-      <h3> Drag & Drop </h3>
-      <canvas
+      <br/>
+      <Autocomplete
+                  className="mb-4"
+                  inputValue={saleitem}
+                  onInputChange={(event, newInputValue) => {
+                    setSaleitem(newInputValue);
+                  }}
+                  id="controllable-states-demo"
+                  options={options}
+                  style={{ width: "250px" }}
+                  renderInput={(params) => <TextField {...params} label="פריט מכירה" variant="outlined" />}
+                />
+      <br></br>
+      <br></br>
+      <Button variant="outlined" color="primary" onClick={handleToggle}>
+  Show backdrop
+</Button>
+<Backdrop className={classes.backdrop} open={open} onClick={() => draw2()}>
+  <CircularProgress color="inherit" />
+</Backdrop>
+      <div className="d-flex justify-content-between">
+                  <Button variant="contained" color="primary" component="span" onClick={() => draw2()}>undo</Button>
+                  <Button variant="contained" color="secondary" component="span" onClick={() =>setSaleitem() }>clear</Button>
+                  <Button variant="contained" color="primary" component="span" onClick={() => setSaleitem()}>save</Button>
+                  <Button variant="contained" color="primary" component="span" onClick={() => setSaleitem()}>load</Button>
+                </div >
+      <canvas style={{    
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+        width: "1000px",
+        height: "500px",
+        backgroundcolor: "black",
+        border: "1px solid #ccc",
+        borderradius: "4px"}}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

@@ -24,6 +24,20 @@ router.get('/:specific',verify('1'),async(req,res) => {
         res.json({ message: err});
     }
 });
+// get specific customer
+router.get('/email/:specific',async(req,res) => {
+    // router.get('/email/:specific',verify('1'),async(req,res) => {
+        console.log("123123123123")
+        try { 
+            console.log("qqqqq")
+            const customer = await Customer.findOne({email : req.params.specific})
+            console.log(customer)
+
+            res.json(customer);
+        }catch(err) {
+            res.json({ message: err});
+        }
+    });
 // update specific customer
 router.patch('/:specific',async(req,res) => {
     try { 

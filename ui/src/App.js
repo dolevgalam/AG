@@ -30,7 +30,6 @@ import EditPricequote from "./components/pricequote/EditPricequote";
 import ViewPricequote from "./components/pricequote/ViewPricequote";
 
 
-
 function App() {
   const [test, setTest] = useState('1');
   const [alert, setAlert] = useState({severity:"",message:"",status:0});
@@ -62,7 +61,7 @@ function App() {
           <Route exact path="/employee/edit/:id" component={EditEmployee} />
           <Route exact path="/pricequote" component={Pricequote} />
           <Route exact path="/pricequote/view/:id" component={ViewPricequote} />
-          <Route exact path="/pricequote/add" component={AddPricequote} />
+          <Route exact path="/pricequote/add" render={() => <div><AddPricequote setAlert={setAlert}/></div>} />
           <Route exact path="/pricequote/edit/:id" component={EditPricequote} />
           <Route component={NotFound} />
         </Switch>

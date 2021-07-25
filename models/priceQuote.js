@@ -4,18 +4,24 @@ const priceQuoteSchema = mongoose.Schema({
     _id: {
         type : String,
         require : true,
-        default : date.getDate(),
     },
-    customer_id: {
+    fullname: {
+        type : String,
+        require : true,
+    },
+    customer: {
         type : String,
         require : true,
     },
     date: {
         type : String,
         require : true,
-        default: date.getFullDate(),
     },
-    salesitem: {
+    datenow: {
+        type : String,
+        require : true,
+    },
+    saleitem: {
         type : String,
         require : true,
     },
@@ -23,31 +29,24 @@ const priceQuoteSchema = mongoose.Schema({
         type : String,
         require : true,
     },
-    length: {
-        type : String,
-        require : true,
-    },
-    width : {
-        type : String,
-        require : true,
-    },
-    height: {
-        type : String,
-        require : true,
-    },
     picturepath: {
         type : String,
         require : true,
     },
-    business_days: {
+    canvas: {
+        type : String,
+        require : true,
+    },
+    hours: {
         type : String,
     },
     price: {
         type : String,
+        default : "טרם נקבע"
     },
     status: {
         type : String,
-        default : "בטיפול"
+        default : "ממתין לתגובה"
     },
 });
 const time = {

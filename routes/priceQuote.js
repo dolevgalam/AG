@@ -52,7 +52,8 @@ router.patch('/:specific',upload.single('image'),async(req,res) => {
         const updatePricequote = await PriceQuote.updateOne(
         {_id : req.params.specific},
         {$set: {
-            customer_id: req.body.customer_id,
+            _id: req.body.id,
+            customer: req.body.customer,
             salesitem: req.body.salesitem,
             description: req.body.description,
             length: req.body.length,
@@ -70,15 +71,19 @@ router.patch('/:specific',upload.single('image'),async(req,res) => {
 });
 
 // post specific priceQuote
-router.post('/',upload.single('image'), async (req, res) => {
+     router.post('/',upload.single('file'), async (req, res) => {
+// router.post('/', async (req, res) => {
+    console.log(req.body)
     const priceQuote = new PriceQuote({
-        customer_id: req.body.customer_id,
-        salesitem: req.body.salesitem,
+        _id: req.body.id,
+        customer: req.body.customer,
+        saleitem: req.body.saleitem,
         description: req.body.description,
-        length: req.body.length,
-        width: req.body.width,
-        height: req.body.height,
-        picturepath: "/images/" + req.file.filename
+        picturepath: "/images/" + req.file.filename,
+        canvas: req.body.canvas,
+        date: req.body.date,
+        datenow: req.body.datenow,
+        fullname: req.body.fullname
     });
     try {
         const savedPriceQuote = await priceQuote.save();
