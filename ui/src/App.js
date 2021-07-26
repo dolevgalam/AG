@@ -62,7 +62,7 @@ function App() {
           <Route exact path="/pricequote" component={Pricequote} />
           <Route exact path="/pricequote/view/:id" component={ViewPricequote} />
           <Route exact path="/pricequote/add" render={() => <div><AddPricequote setAlert={setAlert}/></div>} />
-          <Route exact path="/pricequote/edit/:id" component={EditPricequote} />
+          <Route exact path="/pricequote/edit/:id" render={() => <div><EditPricequote setAlert={setAlert}/></div>} />
           <Route component={NotFound} />
         </Switch>
       </div>

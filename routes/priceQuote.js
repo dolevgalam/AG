@@ -47,22 +47,21 @@ router.get('/:specific',async(req,res) => {;
         res.json({ message: err});
     }
 });
-router.patch('/:specific',upload.single('image'),async(req,res) => {
+router.patch('/:specific',async(req,res) => {
+    console.log(req.body)
     try { 
         const updatePricequote = await PriceQuote.updateOne(
         {_id : req.params.specific},
         {$set: {
-            _id: req.body.id,
-            customer: req.body.customer,
-            salesitem: req.body.salesitem,
-            description: req.body.description,
-            length: req.body.length,
-            width: req.body.width,
-            height: req.body.height,
-            picturepath: "/images/" + req.file.filename,
-            business_days: req.body.business_days,
-            price: req.body.price,
-            status: req.body.status,
+            price: 2150,
+            // status: req.body.status,
+            hours: req.body.hours,
+            item1: "רשת צל",
+            item1_l: req.body.item1_l,
+            item1_w: req.body.item1_w,
+            item2: "יוטה",
+            item2_l: req.body.item2_l,
+            item2_w: req.body.item2_w,
             }});
         res.json(updatePricequote);
     }catch(err) {

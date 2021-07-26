@@ -37,6 +37,24 @@ const priceQuoteSchema = mongoose.Schema({
         type : String,
         require : true,
     },
+    item1: {
+        type : String,
+    },
+    item1_l: {
+        type : String,
+    },
+    item1_w: {
+        type : String,
+    },
+    item2: {
+        type : String,
+    },
+    item2_l: {
+        type : String,
+    },
+    item2_w: {
+        type : String,
+    },
     hours: {
         type : String,
     },

@@ -11,7 +11,7 @@ import Slide from '@material-ui/core/Slide';
 import { Checkmark } from 'react-checkmark'
 import Modal from 'react-bootstrap/Modal'
 
-const Editpricequote = () => {
+const Editpricequote = ({ setAlert }) => {
   const [pricequote, setPricequote] = useState({
     _id: "",
     customer: "",
@@ -41,6 +41,23 @@ const Editpricequote = () => {
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
+  const send = event => {
+    window.scrollTo(0, 0)
+    console.log("send");
+    const data = new FormData();
+    axios.patch(`http://localhost:3001/pricequote/${id}`, pricequote)
+      .then(function (res) {
+        var info = "בוצע עדכון מוצלח להצעת המחיר "
+        setAlert({ severity: "success", message: info, status: 1 })
+        setTimeout(() => {
+          setAlert({ status: 0 })
+          history.push("/pricequote");
+        }, 2000);
+      })
+      .catch(err => console.log(err));
+
+  };
+
   const onInputChange = e => {
     setPricequote({ ...pricequote, [e.target.name]: e.target.value });
   };
@@ -226,37 +243,6 @@ const Editpricequote = () => {
                   style={{ width: 100, marginRight: 30 }}
                 />
                 <div>
-                  {/* <div className="d-flex">
-                    <Autocomplete
-                      // className="mb-4"
-                      inputValue={"saleitem"}
-                      onInputChange={(event, newInputValue) => {
-                        // setSaleitem(newInputValue);
-                      }}
-                      // id="controllable-states-demo"
-                      options={options}
-                      style={{ width: 200 }}
-                      renderInput={(params) => <TextField {...params} label="פריט מכירה" />}
-                    />
-                    <TextField
-                      onChange={e => onInputChange(e)}
-                      value={price}
-                      // id="standard-read-only-input"
-                      name="price"
-                      label="אורך"
-                      style={{ width: 100, marginLeft: 30, marginRight: 30 }}
-                    />
-                    <TextField
-                      onChange={e => onInputChange(e)}
-                      value={price}
-                      // id="standard-read-only-input"
-                      name="price"
-                      label="רוחב"
-                      style={{ width: 100, marginLeft: 30, marginRight: 30 }}
-                    />
-                    <br />
-                    <br />
-                  </div> */}
                 </div>
                 <div>
                   <div className="d-flex">
@@ -376,41 +362,7 @@ const Editpricequote = () => {
           </Button>
                         </Modal.Footer>
                       </Modal>
-                      {/* <Dialog
-                        style={{ textAlign: "right" }}
-                        open={open}
-                        TransitionComponent={Transition}
-                        keepMounted
-                        onClose={handleClose}
-                        aria-labelledby="alert-dialog-slide-title"
-                        aria-describedby="alert-dialog-slide-description"
-                      >
-                        <DialogTitle id="alert-dialog-slide-title">{'המחיר הינו 2150 ש"ח כולל מע"מ'}</DialogTitle>
-                        <DialogContent>
-                          <DialogContentText id="alert-dialog-slide-description" style={{ direction: "rtl" }}>
-                            <div className="d-flex">   <p style={{ textAlign: "right", fontWeight: "bold", textDecoration: "underline" }} > המחיר חושב תוך התייחסות למגוון פרמטרים : </p>  </div>
-                            <div className="d-flex" style={{ position: "absolute", right: "8px" }} > <Checkmark size='20px' />    <p style={{ textAlign: "right", fontWeight: "bold" }} > זמינות מלאי</p>   </div>
-                            <br />
-                            <div className="d-flex" style={{ position: "absolute", right: "8px" }} > <Checkmark size='20px' />    <p style={{ textAlign: "right", fontWeight: "bold" }} > תאריך אספקה</p>   </div>
-                            <br />
-                            <div className="d-flex" style={{ position: "absolute", right: "8px" }} > <Checkmark size='20px' />    <p style={{ textAlign: "right", fontWeight: "bold" }} > שעות עבודה</p>   </div>
-                            <br />
-                            <div className="d-flex" style={{ position: "absolute", right: "8px" }} > <Checkmark size='20px' />    <p style={{ textAlign: "right", fontWeight: "bold" }} > מחיר חומרי גלם</p>   </div>
-                            <br />
-                            <br />
-                            <div className="d-flex">   <p style={{ textAlign: "right", fontWeight: "bold", textDecoration: "underline" }} > אחוזי הרווח הינם :  </p>  </div>
-                            <div className="d-flex" style={{ position: "absolute", right: "8px" }} > <Checkmark size='20px' />    <p style={{ textAlign: "right", fontWeight: "bold" }} > 30% </p>   </div>
-                          </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleClose} color="primary">
-                            ביטול
-                          </Button>
-                          <Button onClick={handleClose} color="primary">
-                            אישור
-                            </Button>
-                        </DialogActions>
-                      </Dialog> */}
+                      
                     </div>
                     <br />
                     <br />
@@ -446,7 +398,7 @@ const Editpricequote = () => {
               <form className={classes.container} noValidate>
               </form>
               <br></br>
-              <button className="btn btn-primary btn-block" onClick={"send"}>עדכן הצעת מחיר</button>
+              <button className="btn btn-primary btn-block" onClick={send}>עדכן הצעת מחיר</button>
             </header>
           </div>
         </div>
