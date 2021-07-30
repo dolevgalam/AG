@@ -29,15 +29,16 @@ const Editpricequote = ({ setAlert }) => {
     item2: "",
     item2_l: "",
     item2_w: "",
+    canvas: ""
   });
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
-    setPriceprice('₪2150')
+    setPriceprice('₪3220')
   }
   const handleShow = () => setShow(true);
 
-  const { _id, customer, description, picturepath, date, price, hours, item1, item1_l, item1_w, item2, item2_l, item2_w } = pricequote;
+  const { _id, customer, description, picturepath, date, price, hours, item1, item1_l, item1_w, item2, item2_l, item2_w,canvas } = pricequote;
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -45,6 +46,7 @@ const Editpricequote = ({ setAlert }) => {
     window.scrollTo(0, 0)
     console.log("send");
     const data = new FormData();
+    pricequote.canvas = childRef.current.getSaveData()
     axios.patch(`http://localhost:3001/pricequote/${id}`, pricequote)
       .then(function (res) {
         var info = "בוצע עדכון מוצלח להצעת המחיר "
@@ -71,7 +73,7 @@ const Editpricequote = ({ setAlert }) => {
   const childRef = useRef();
   const childRef1 = useRef();
   const history = useHistory();
-  const options = ['יוטה', 'רשת צל', 'סגירת מרפסת'];
+  const options = ['שמשונית לבנה', 'שמשונית ירוקה', 'בד חלון'];
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
 
@@ -80,7 +82,7 @@ const Editpricequote = ({ setAlert }) => {
   };
   const onchangepriceprice = () => {
     console.log("sfsdfsdfsdf")
-    setPriceprice('₪ 2150')
+    setPriceprice('₪ 3220')
     console.log(priceprice)
     setOpen(false);
   };
@@ -224,9 +226,9 @@ const Editpricequote = ({ setAlert }) => {
                   label="תיאור מילולי"
                   value={pricequote.description}
                   multiline
-                  rows={2}
+                  rows={10}
                   fullWidth="true"
-                  style={{ textAlign: "right" }}
+                  style={{ textAlign: "right",direction:"rtl"}}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -334,7 +336,7 @@ const Editpricequote = ({ setAlert }) => {
                       </Button>
                       <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton>
-                          <Modal.Title><p style={{ textAlign: "right", fontWeight: "bold", position: "absolute", right: "50px" }} > המחיר הינו 2150 ש"ח כולל מע"מ</p></Modal.Title>
+                          <Modal.Title><p style={{ textAlign: "right", fontWeight: "bold", position: "absolute", right: "50px" }} > המחיר הינו 3220 ש"ח כולל מע"מ</p></Modal.Title>
                         </Modal.Header>
                         <Modal.Body style={{ textAlign: "right" }}>
                           <div className="d-flex">   <p style={{ direction: "rtl", fontWeight: "bold", textDecoration: "underline", position: "absolute", right: "8px" }} > המחיר חושב תוך התייחסות למגוון פרמטרים : </p>  </div>

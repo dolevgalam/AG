@@ -82,7 +82,7 @@ function Addpricequote({ setAlert }) {
   return (
     <div className="container">
       <div className="w-75 mx-auto shadow p-5">
-        <h2 className="text-center mb-4"> הזן את הנתונים עבור הצעת המחיר</h2>
+      <p style={{ textDecoration: "underline" ,marginRight: "100px", fontFamily: "calibri", textAlign: "right", fontWeight: "bold", fontSize: "40px", direction: "rtl" }}>הזן את הנתונים עבור הצעת המחיר</p>
         <div className="App">
           <header className="App-header">
             <form action="#">
@@ -94,7 +94,7 @@ function Addpricequote({ setAlert }) {
                   }}
                   label="מועד אספקה רצוי"
                   type="datetime-local"
-                  defaultValue="2020-07-24T10:30"
+                  defaultValue="2021-07-27T10:30"
                   className={classes.textField}
                   fullWidth="true"
                   InputLabelProps={{
@@ -116,19 +116,23 @@ function Addpricequote({ setAlert }) {
                 />
               </div>
               <TextField
+                style={{ textAlign: "right",direction:"rtl"}}
                 onChange={(event) => {
                   setDescription(event.target.value);
                 }}
                 className="mb-4"
-                id="outlined-multiline-static"
+                id="desc"
                 label="תיאור מילולי"
                 multiline
                 rows={10}
+                onClick={(event) => {
+                  setDescription('');
+                }}                
                 defaultValue="אנא תאר את הפריט שברצונך להזמין , ככל שהתיאור יהיה מפורט יותר כך נוכל לעזור לך בצורה מיטבית ואיכותית"
                 variant="outlined"
                 fullWidth="true"
               />
-              <p style={{ textAlign: "right" }} > ברשותך מערכת שתוכל לשרטט את הדרישה שלך</p>
+              <p style={{ textDecoration: "underline" ,fontFamily: "calibri", textAlign: "right", fontWeight: "bold",fontSize: "20px"}} > ברשותך מערכת שתוכל לשרטט את הדרישה שלך</p>
               <CanvasDraw ref={childRef}
                 className="mb-4"
                 style={{

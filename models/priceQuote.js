@@ -66,6 +66,11 @@ const priceQuoteSchema = mongoose.Schema({
         type : String,
         default : "ממתין לתגובה"
     },
+    statusorder: {
+        type : String,
+        default : "ממתין לביצוע חיתוך"
+    },
+    
 });
 const time = {
 

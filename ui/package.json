@@ -6,6 +6,7 @@
     "@dnd-kit/core": "^3.0.3",
     "@dnd-kit/modifiers": "^2.0.0",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "*",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -23,7 +24,8 @@
     "react-checkmark": "^1.4.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-to-pdf": "^0.0.14"
   },
   "scripts": {
     "start": "react-scripts start",

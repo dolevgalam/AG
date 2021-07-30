@@ -17,9 +17,11 @@ const authsRoute = require('./routes/auth');
 const salesItemRoute = require('./routes/salesItem');
 const priceQuoteRoute = require('./routes/priceQuote');
 const cancelpriceQuoteRoute = require('./routes/cancelpriceQuote');
+const orderRoute = require('./routes/order');
 
 app.use('/cancelpricequote',cancelpriceQuoteRoute);
 app.use('/pricequote',priceQuoteRoute);
+app.use('/order',orderRoute);
 app.use('/salesItem', salesItemRoute);
 app.use('/user', usersRoute);
 app.use('/customer', customersRoute);

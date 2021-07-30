@@ -62,6 +62,8 @@ router.patch('/:specific',async(req,res) => {
             item2: "יוטה",
             item2_l: req.body.item2_l,
             item2_w: req.body.item2_w,
+            canvas: req.body.canvas,
+            status: req.body.status
             }});
         res.json(updatePricequote);
     }catch(err) {

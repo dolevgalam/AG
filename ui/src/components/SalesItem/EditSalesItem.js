@@ -10,7 +10,7 @@ const EditSalesItem = () => {
     name: "",
     description: "",
     picturepath: "",
-    date: ""
+    date: "",
   });
 
   const { _id, name, description, picturepath, date } = salesItem;

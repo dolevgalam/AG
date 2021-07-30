@@ -32,10 +32,10 @@ function Login({setAlert}) {
             localStorage.setItem('token', res.data);
             localStorage.setItem('user', res.config.data);
             localStorage.setItem('mail', email);
-            setAlert({severity:"success",message:"message-success",status:1})
+            setAlert({severity:"success",message:"התחברות בוצעה בהצלחה! ברוך הבא למערכת",status:1})
             setTimeout(() => {
                 setAlert({status:0})
-                history.push("/");
+                history.push("/employee");
               }, 2000);
         }).catch(function (err) {
             console.log("456");

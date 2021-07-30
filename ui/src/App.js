@@ -28,6 +28,9 @@ import Pricequote from "./components/pages/pricequote";
 import AddPricequote from "./components/pricequote/AddPricequote";
 import EditPricequote from "./components/pricequote/EditPricequote";
 import ViewPricequote from "./components/pricequote/ViewPricequote";
+import AddOrder from "./components/order/AddOrder";
+import EditOrder from "./components/order/EditOrder";
+import ViewOrder from "./components/order/ViewOrder";
 
 
 function App() {
@@ -63,6 +66,9 @@ function App() {
           <Route exact path="/pricequote/view/:id" component={ViewPricequote} />
           <Route exact path="/pricequote/add" render={() => <div><AddPricequote setAlert={setAlert}/></div>} />
           <Route exact path="/pricequote/edit/:id" render={() => <div><EditPricequote setAlert={setAlert}/></div>} />
+          <Route exact path="/order/view/:id" component={ViewOrder} />
+          <Route exact path="/order/add/:id" render={() => <div><AddOrder setAlert={setAlert}/></div>} />
+          <Route exact path="/order/edit/:id" render={() => <div><EditOrder setAlert={setAlert}/></div>} />
           <Route component={NotFound} />
         </Switch>
       </div>

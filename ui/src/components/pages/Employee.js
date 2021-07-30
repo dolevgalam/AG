@@ -14,7 +14,13 @@ const Employee  = () => {
 
   const loadAllEmployee  = async () => {
     console.log("load start");
-    const result = await axios.get("http://localhost:3001/employee");
+    const result = await axios.get("http://localhost:3001/employee",{
+      headers: {
+          'authorization': localStorage.token,
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+      }
+  });
     console.log(result.data);
     setEmployee(result.data.reverse());
     setEmployeefilter(result.data.reverse());
@@ -46,7 +52,8 @@ const Employee  = () => {
   return (
     <div className="container container-fluid container-md">
       {/* {localStorage.getItem('user')} */}
-      <h2 style={{ marginLeft: 20 }}>  Employee</h2>
+      {/* <h2 style={{ marginLeft: 20 }}>  Employee</h2> */}
+      <br></br>
       <div className="contanier container-fluid">
         <input type="text" style={{ marginLeft: 0, width: "250px" }} value={search} placeholder="Type for Search..." onChange={handleInputChangeSearch}></input>
         <Link className="btn btn-primary" style={{ right: 0, marginLeft: 730 }} to={`/employee/add`}>Add New</Link>
