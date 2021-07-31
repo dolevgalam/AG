@@ -16,7 +16,6 @@ const transporter = nodemailer.createTransport(sendgridTransport({
     }
 }))
 router.post('/register', async (req,res) => {
-    console.log("backend register start")
     //console.log(req.body);
     const schema = Joi.object({ 
         id: Joi.string() .min(9) .max(9) .required(),
@@ -36,7 +35,6 @@ router.post('/register', async (req,res) => {
     if(emailExist) return res.status(400).send("Email already exists");
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
-    console.log("line 39");
     try{
         const user = new User({
             email: req.body.email,
@@ -54,7 +52,6 @@ router.post('/register', async (req,res) => {
             phone: req.body.phone,
         });
         const savedCustomer = await customer.save();
-        console.log("line 57");
         transporter.sendMail({
             to:req.body.email,
             from:"galamdolev@gmail.com",
@@ -89,5 +86,7 @@ router.post('/login', async (req,res) => {
         res.status(400).send({ message:err});
     }
 });
+
+router.get('/login/perm/')
 
 module.exports = router;

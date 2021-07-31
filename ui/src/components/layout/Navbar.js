@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -13,6 +13,9 @@ function Alert(props) {
 }
 
 const Navbar = ({ test , alert } ) => {
+  useEffect (()=>{
+    console.log("EEEEEEEEEEEEEEEEEEEE")
+  });
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">

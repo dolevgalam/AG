@@ -34,8 +34,9 @@ function Login({setAlert}) {
             localStorage.setItem('mail', email);
             setAlert({severity:"success",message:"התחברות בוצעה בהצלחה! ברוך הבא למערכת",status:1})
             setTimeout(() => {
+                var x = axios.get("http://localhost:3001/auth/login/prem/" + localStorage.user)
                 setAlert({status:0})
-                history.push("/employee");
+                history.push("/");
               }, 2000);
         }).catch(function (err) {
             console.log("456");
